@@ -1,0 +1,22 @@
+services:
+  api:
+    build: .
+    image: phoenix-app
+    container_name: phoenix-api
+    ports:
+      - "8080:5000"
+    environment:
+     
+      - DATABASE_URI=mongodb://database:27017/phoenix
+    depends_on:
+      - database
+
+  database:
+    image: mongo:latest
+    container_name: phoenix-database
+    volumes:
+     
+      - phoenix-mongo-data:/data/db
+
+volumes:
+  phoenix-mongo-data:
